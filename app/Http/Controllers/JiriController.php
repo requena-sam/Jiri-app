@@ -34,8 +34,8 @@ class JiriController extends Controller
      */
     public function store(Request $request)
     {
-        Jiri::create($request->all());
-        return redirect()->route('jiri.index');
+        $jiri = Jiri::create($request->all());
+        return to_route('jiri.show', $jiri);
     }
 
     /**

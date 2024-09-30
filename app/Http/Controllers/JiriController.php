@@ -51,26 +51,28 @@ class JiriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Jiri $jiri)
     {
-        //
+        return view('jiri.edit', compact('jiri'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public
-    function update(Request $request, string $id)
+    function update(JiriStoreRequest $request, Jiri $jiri)
     {
-        //
+       $jiri->update($request->validated());
+       return to_route('jiri.show', $jiri);
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public
-    function destroy(string $id)
+    function destroy(Jiri $jiri)
     {
-        //
+        $jiri->delete();
+        return to_route('jiri.index');
     }
 }

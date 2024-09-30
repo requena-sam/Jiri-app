@@ -1,0 +1,38 @@
+{
+    "Create a new Jiri" : "Créer un nouveau Jiri",
+    "Your Jiris" : "Vos Jiris",
+    "Your Projects" : "Vos projets",
+    "Your Contacts": "Vos contacts",
+    "Upcomings Jiris" : "Jiris à venir",
+    "Pasts Jiris" : "Jiris passés",
+    "Jiri's name" : "Nom du Jiri",
+    "Starting at" : "Début le",
+    "Create new project" : "Créer un nouveau projet",
+    "Project name" : "Nom du projet",
+    "Description of my project" : "Description du projet",
+    "My new project" : "Mon nouveau projet",
+    "Edit this Jiri" : "Modifier le Jiri",
+    "Delete this Jiri" : "Supprimer le Jiri",
+    "Project Name" : "Nom du projet",
+    "Project URL" : "URL du projet",
+    "Edit this project" : "Modifier ce projet",
+    "Delete this project" : "Supprimer ce projet",
+    "Create new contact" : "Créer un nouveau contact",
+    "Contact name" : "Nom du contact",
+    "Contact email" : "Email du contact",
+    "Delete this contact" : "Supprimer ce contact",
+    "Edit this contact": "Modifier ce contact",
+    "Edit" : "Modifier",
+    "Update this contact" : "Mettre à jour ce contact",
+    "New Jiri name" : "Nom du nouveau Jiri",
+    "Update starting at" : "Mise à jour de la date du début",
+    "Update this jiri" : "Mettre à jour ce jiri",
+    "Change contact name" : "Changer le nom du contact",
+    "Change contact email" : "Changer l'email du contact",
+    "Update this project" : "Modidier le projet",
+    "Cancel modification" : "Annuler les modifications"
+
+
+
+
+}

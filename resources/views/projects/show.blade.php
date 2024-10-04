@@ -10,7 +10,12 @@
         </div>
     </dl>
     <div class="flex gap-2">
-        <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/projects/{{ $project->id }}/edit">{{ __("Edit this Project") }}</a>
-        <x-form.project.delete :$project/>
+        @can('update', $project)
+            <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition"
+               href="/projects/{{ $project->id }}/edit">{{ __("Edit this Project") }}</a>
+        @endcan
+        @can('delete', $project)
+            <x-form.project.delete :$project/>
+        @endcan
     </div>
 </x-layouts.main>

@@ -24,4 +24,9 @@ class Jiri extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Contact::class)->wherePivot('role', ContactRole::Student->value);
+    }
 }

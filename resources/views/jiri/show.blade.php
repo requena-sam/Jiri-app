@@ -19,7 +19,12 @@
         </div>
     </dl>
     <div class="flex gap-2">
-        <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/jiris/{{ $jiri->id }}/edit">{{ __("Edit this Jiri") }}</a>
-        <x-form.jiri.delete :$jiri/>
+        @can('update', $jiri)
+            <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition"
+               href="/jiris/{{ $jiri->id }}/edit">{{ __("Edit this Jiri") }}</a>
+        @endcan
+        @can('delete', $jiri)
+            <x-form.jiri.delete :$jiri/>
+        @endcan
     </div>
 </x-layouts.main>

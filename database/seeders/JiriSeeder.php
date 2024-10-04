@@ -14,5 +14,6 @@ class JiriSeeder extends Seeder
     public function run(): void
     {
         Jiri::factory(10)->create();
+
     }
 }

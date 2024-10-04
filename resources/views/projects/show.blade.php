@@ -1,24 +1,16 @@
 <x-layouts.main>
-    <h1 class="font-bold text-2xl">{{$project->name}}</h1>
+    <h1 class="font-bold text-2xl">{{ $project->name }}</h1>
+    <a href="/projects" class="underline">← {{ __("Back") }}</a>
     <dl class="flex flex-col gap-4 bg-slate-50 p-4">
         <div>
-            <h2 class="font-bold">{{__('Project Name')}}</h2>
-            <p>{{$project->name}}</p>
-            <h2 class="font-bold">{{__('Description')}}</h2>
-            <p>{{$project->description}}</p>
-            <h2 class="font-bold">{{__('Project URL')}}</h2>
-            <a class="text-blue-400 hover:underline" href="{{$project->url}}">{{$project->url}}</a>
+            <dt class="font-bold">{{ __("Name") }}</dt>
+            <dd>{{ $project->name }}</dd>
+            <dt class="font-bold">{{ __("Description") }}</dt>
+            <dd>{{ $project->description }}</dd>
         </div>
     </dl>
-    <div class="flex gap-3">
-        <x-link href="{{route('project.edit', $project)}}">
-            {{__('Edit this project')}}
-        </x-link>
-        <form action="{{route('project.delete', $project)}}" method="post">
-            @method('DELETE')
-            @csrf
-            <x-button>{{__('Delete this project')}}</x-button>
-        </form>
+    <div class="flex gap-2">
+        <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/projects/{{ $project->id }}/edit">{{ __("Edit this Project") }}</a>
+        <x-form.project.delete :$project/>
     </div>
-
 </x-layouts.main>

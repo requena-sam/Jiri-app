@@ -17,10 +17,8 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(3, true),
-            'description' => $this->faker->sentence(),
-            'url' => $this->faker->url(),
-            //
+            "name" => fake()->words(2, true),
+            "description" => fake()->realText(),
         ];
     }
 }

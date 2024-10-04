@@ -1,16 +1,14 @@
 <x-layouts.main>
-    <div class="flex gap-3 items-center">
-        <h1 class="font-bold text-2xl">{{__('Your Jiris')}}</h1>
-        <a href="/jiris/create" class="p-2 text-xs  bg-red-500 rounded text-white hover:bg-red-700">+</a>
+    <h1 class="font-bold text-2xl">{{ __("Your Jiris") }}</h1>
+    <div class="flex w-100 gap-6">
+        <section class="gap-10 bg-slate-50 px-10 py-6 w-full rounded">
+            <h2 class="font-bold text-2xl mb-2">{{ __("Upcoming Jiris") }}</h2>
+            <x-jiris.list :jiris="$upcomingJiris"/>
+        </section>
+        <section class="gap-10 bg-slate-50 px-10 py-6 w-full rounded">
+            <h2 class="font-bold text-2xl mb-2">{{ __("Past Jiris") }}</h2>
+            <x-jiris.list :jiris="$pastJiris"/>
+        </section>
     </div>
-    <section>
-        <h2 class="font-bold">{{__('Upcomings Jiris')}}</h2>
-        <x-jiris.list :jiris="$upcomingJiris"/>
-    </section>
-    <section>
-        <h2 class="font-bold">{{__('Pasts Jiris')}}</h2>
-        <x-jiris.list :jiris="$pastJiris"/>
-    </section>
-    <section>
-    </section>
+    <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/jiris/create">{{ __("Create a Jiri") }}</a>
 </x-layouts.main>

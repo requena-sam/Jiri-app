@@ -3,9 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\ContactRole;
-use App\Models\Contact;
-use App\Models\Jiri;
-use App\Models\Project;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,39 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)
-            ->has(Jiri::factory()->count(5), 'jiris')
-            ->has(Contact::factory()->count(10), 'contacts')
-            ->has(Project::factory()->count(5), 'projects')
-            ->create()
-            ->each(function ($user) {
-                $user->jiris->each(function ($jiri) use ($user) {
-                    $jiri->contacts()->attach($user->contacts->random(10), [
-                        'role' => random_int(0, 1) ?
-                            ContactRole::Evaluator->value :
-                            ContactRole::Student->value
-                    ]);
-                });
-            });
+        User::factory(1)
+            ->hasJiris(5)
+            ->hasContacts(10)
+            ->hasProjects(5)
+            ->create();
 
         User::factory()
-            ->has(Jiri::factory()->count(5), 'jiris')
-            ->has(Contact::factory()->count(10), 'contacts')
-            ->has(Project::factory()->count(5), 'projects')
+            ->hasJiris(5)
+            ->hasContacts(10)
+            ->hasProjects(5)
             ->create([
-                'name' => 'Sam',
-                'email' => 'sam@test.be',
-                "password" => 'password'
-            ])
-            ->each(function ($user) {
-                $user->jiris->each(function ($jiri) use ($user) {
-                    $jiri->contacts()->attach($user->contacts->random(10), [
-                        'role' => random_int(0, 1) ?
-                            ContactRole::Evaluator->value :
-                            ContactRole::Student->value
-                    ]);
-                });
-            });
+                'name' => 'Loïc Delanoë',
+                'email' => 'loic.del4127@gmail.com',
+                "password" => '12345678'
+            ]);
 
+        // Seed Attendance
+        User::all()->each(function ($user) {
+            $user->jiris->each(function ($jiri) use ($user) {
+                $jiri->evaluators()->attach(
+                    $user->contacts->random(10), ['role' => random_int(0,1) ? ContactRole::Student->value : ContactRole::Evaluator->value]
+                );
+            });
+        });
     }
 }

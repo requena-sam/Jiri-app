@@ -27,4 +27,26 @@
             <x-form.jiri.delete :$jiri/>
         @endcan
     </div>
+    <div>
+        <h2 class="font-bold text-2xl">
+            {{ __("Student contact") }}
+        </h2>
+        <ul>
+            @foreach($jiri->students as $student )
+                <li>
+                   {{ $student->full_name }}
+                </li>
+            @endforeach
+        </ul>
+        <h2 class="font-bold text-2xl">
+            {{ __("Evaluators contact") }}
+        </h2>
+        <ul>
+            @foreach($jiri->evaluators as $evaluator )
+                <li>
+                    {{ $evaluator->full_name }}
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </x-layouts.main>

@@ -12,4 +12,9 @@ class Attendance extends Model
     protected $fillable = [
         "role"
     ];
+
+    public function jiri()
+    {
+        return $this->belongsTo(Jiri::class);
+    }
 }

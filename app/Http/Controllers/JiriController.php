@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ContactRole;
 use App\Models\Jiri;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -27,16 +28,44 @@ class JiriController extends Controller
      */
     public function create(): View
     {
-        return view('jiri.create');
+        $contacts = Auth::user()->contacts;
+        $projects = Auth::user()->projects;
+        return view('jiri.create', compact('contacts', 'projects'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(JiriStoreRequest $request): RedirectResponse
+    public function store(JiriStoreRequest $request)
     {
         $jiri = Jiri::create($request->validated());
 
+        if ($request->has('roles')) {
+
+            $roles = $request->input('roles');
+            $roles = collect($roles);
+
+            //Students
+            $students = collect($roles->filter(fn($value, $key) => str_ends_with($value, ContactRole::Student->value)
+            ));
+
+            $students = $students->map(fn($value, $key) => explode('-', $value)[0]
+            )->toArray();
+
+            //Evaluators
+            $evaluators = collect($roles->filter(fn($value, $key) => str_ends_with($value, ContactRole::Evaluator->value)
+            ));
+
+            $evaluators = $evaluators->map(fn($value, $key) => explode('-', $value)[0])->toArray();
+
+            $jiri->students()->attach($students);
+            $jiri->evaluators()->attach($evaluators);
+        }
+
+
+        if ($request->has('projects')) {
+            $jiri->projects()->attach($request->input('projects'));
+        }
         return to_route('jiri.show', $jiri);
     }
 
@@ -45,7 +74,7 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri): View
     {
-        $jiri->load(['students', 'evaluators']);
+        $jiri->load(['students', 'evaluators', 'projects']);
 
         return view('jiri.show', compact('jiri'));
     }

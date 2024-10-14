@@ -47,12 +47,11 @@ class AttendanceController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Attendance $attendance)
     {
-        //
+        $attendance->role = $request->role;
+        $attendance->save();
+        return redirect()->route('jiri.show', $attendance->jiri_id);
     }
 
     /**

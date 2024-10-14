@@ -27,15 +27,31 @@ class Jiri extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function students(): BelongsToMany
+    public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class, Attendance::class)
-            ->wherePivot('role', ContactRole::Student->value);
+            ->withPivot('id');
+    }
+
+    public function students(): BelongsToMany
+    {
+        return $this->contacts()
+            ->withPivotValue('role', ContactRole::Student->value);
+
     }
 
     public function evaluators(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class, Attendance::class)
-            ->wherePivot('role', ContactRole::Evaluator->value);
+        return $this->contacts()
+            ->withPivotValue('role', ContactRole::Evaluator->value);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Contact::class, Attendance::class);
+    }
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, Assignement::class);
     }
 }

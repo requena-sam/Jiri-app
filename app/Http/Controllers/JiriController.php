@@ -48,14 +48,12 @@ class JiriController extends Controller
             //Students
             $students = collect($roles->filter(fn($value, $key) => str_ends_with($value, ContactRole::Student->value)
             ));
-
             $students = $students->map(fn($value, $key) => explode('-', $value)[0]
             )->toArray();
 
             //Evaluators
             $evaluators = collect($roles->filter(fn($value, $key) => str_ends_with($value, ContactRole::Evaluator->value)
             ));
-
             $evaluators = $evaluators->map(fn($value, $key) => explode('-', $value)[0])->toArray();
 
             $jiri->students()->attach($students);

@@ -15,7 +15,7 @@ class Contact extends Model
     use HasAttributes;
 
     protected $fillable = [
-        "first_name", "last_name", "email"
+        "first_name", "last_name", "email", "image", "user_id"
     ];
 
     public function fullName(): Attribute

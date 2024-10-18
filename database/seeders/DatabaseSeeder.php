@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                     )
             )
             ->create();
-        User::factory(3)
+        User::factory(1)
             ->has(
                 Jiri::factory()
                     ->count(5)
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
                             }),
                     )
             )
-            ->create(['name'=>'Sam Requena', 'email'=>'sam@test.be', 'password' => 'password']);
+            ->create(['name'=>'Sam Requena', 'email'=>'sam@sam.be', 'password' => 'password']);
     }
 }
 

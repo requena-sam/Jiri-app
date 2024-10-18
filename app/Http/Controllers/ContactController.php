@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\hasImagesVariant;
 use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    use hasImagesVariant;
     public function index()
     {
         $contacts = Auth::user()->contacts;
@@ -25,6 +30,7 @@ class ContactController extends Controller
      */
     public function create(): View
     {
+        Auth::user()->contacts;
         return view("contacts.create");
     }
 
@@ -33,7 +39,14 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
-        $contact = Contact::create($request->validated());
+
+        $validated = $request->validated();
+        $path = self::imageStoreVariant($request);
+
+        $validated['image'] = $path;
+        $contact = Auth::user()->contacts()->create($validated);
+        $contact->image = $path;
+        $contact->save();
 
         return to_route('contact.show', $contact);
     }

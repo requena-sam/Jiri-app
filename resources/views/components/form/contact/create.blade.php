@@ -1,4 +1,4 @@
-<form {{ $attributes }} method="post" class="flex flex-col gap-4 bg-slate-50 p-4">
+<form {{ $attributes }} method="post" enctype="multipart/form-data" class="flex flex-col gap-4 bg-slate-50 p-4">
     @csrf
     <x-form.input
         label="First name"
@@ -17,6 +17,11 @@
         type="text"
         name="email"
         placeholder="jon@doe.com"
+    />
+    <x-form.input
+        label="Photo de profil"
+        type="file"
+        name="image"
     />
     <div>
         <x-buttons.main>{{ __("Create this Contact") }}</x-buttons.main>
